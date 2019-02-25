@@ -29,6 +29,7 @@ export function withGoogleMap(BaseComponent) {
     handleComponentMount = _.bind(this.handleComponentMount, this)
 
     getChildContext() {
+      window.map = this.state.map
       return {
         [MAP]: this.state.map,
       }
