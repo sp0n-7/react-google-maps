@@ -42,6 +42,8 @@ export class Map extends React.PureComponent {
      * @type Array<[id:string, mapType:MapType|*]>
      */
     defaultExtraMapTypes: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.any)),
+
+    styles: PropTypes.arrayOf(PropTypes.any),
   }
 
   static contextTypes = {
@@ -50,7 +52,7 @@ export class Map extends React.PureComponent {
 
   /**
    * @see https://developers.google.com/maps/documentation/javascript/3.exp/reference#Map
-   * @public 
+   * @public
    */
   fitBounds(...args) {
     return this.context[MAP].fitBounds(...args)
@@ -58,7 +60,7 @@ export class Map extends React.PureComponent {
 
   /**
    * @see https://developers.google.com/maps/documentation/javascript/3.exp/reference#Map
-   * @public 
+   * @public
    */
   panBy(...args) {
     return this.context[MAP].panBy(...args)
@@ -66,7 +68,7 @@ export class Map extends React.PureComponent {
 
   /**
    * @see https://developers.google.com/maps/documentation/javascript/3.exp/reference#Map
-   * @public 
+   * @public
    */
   panTo(...args) {
     return this.context[MAP].panTo(...args)
@@ -74,7 +76,7 @@ export class Map extends React.PureComponent {
 
   /**
    * @see https://developers.google.com/maps/documentation/javascript/3.exp/reference#Map
-   * @public 
+   * @public
    */
   panToBounds(...args) {
     return this.context[MAP].panToBounds(...args)
@@ -119,5 +121,12 @@ const eventMap = {}
 const updaterMap = {
   extraMapTypes(instance, extra) {
     extra.forEach(it => instance.mapTypes.set(...it))
+  },
+  styles(instance, styles) {
+    const styleType = new google.maps.StyledMapType(styles, {
+      name: "Styled Map",
+    })
+    instance.mapTypes.set("styled_map", styleType)
+    instance.setMapTypeId("styled_map")
   },
 }

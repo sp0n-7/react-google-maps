@@ -233,6 +233,7 @@ declare module 'react-google-maps/lib/components/GoogleMap' {
         mapTypeId?: google.maps.MapTypeId | string
         options?: google.maps.MapOptions
         streetView?: google.maps.StreetViewPanorama
+        styles?: any
         tilt?: number
         zoom?: number
 
